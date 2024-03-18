@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
 
-const messaSchema = new mongoose.Schema({
+const messageSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true, 
+  },
   email: {
     type: String,
-    reuired: true,
+    required: true, 
   },
   content: {
     type: String,
@@ -11,6 +15,6 @@ const messaSchema = new mongoose.Schema({
   },
 });
 
-const messages = mongoose.model("messages", messaSchema);
+const messages = mongoose.model("messages", messageSchema);
 
 module.exports = messages;

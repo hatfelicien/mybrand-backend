@@ -1,19 +1,16 @@
-// https://www.npmjs.com/package/multer
+const express = require("express");
+const blogsController = require("../controllers/Blogs");
+const upload = require("../utils/upload");
+const verifyAuth = require("../middlewares/auth");
+const { blogValidation } = require("../middlewares/validation");
 
-const express = require('express')
-const blogsController = require('../controllers/Blogs');
-const upload = require('../utils/upload');
-const verifyAuth = require('../middlewares/auth');
+const route = express.Router();
 
+route.post("/new", verifyAuth, upload.single("image"), blogValidation, blogsController.newBlog);
+route.get("/all", blogsController.allblogs);
+route.patch('/like/:id',verifyAuth, blogsController.likeBlog);
+route.patch('/unlike/:id',verifyAuth, blogsController.unlikeBlog);
+route.put("/:id", verifyAuth, upload.single("image"), blogValidation, blogsController.updateBlog);
+route.delete("delete/:id", verifyAuth, blogsController.deleteBlog);
 
-
-const route = express.Router()
-
-
-route.post("/new", upload.single('image'), verifyAuth, blogsController.newBlog);
-route.put("/update/:id", blogsController.updateBlog);
-route.delete("/delete/:id", blogsController.deleteBlog);
-
-
-
-module.exports = route
+module.exports = route;
