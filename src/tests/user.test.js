@@ -11,7 +11,6 @@ describe("User API Tests", () => {
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb3VuVXNlciI6eyJfaWQiOiI2NWViMzFjYzJiN2Y4ZDY1N2I4NDY0ZDciLCJuYW1lIjoicG9saXRlIiwiZW1haWwiOiJwb2xpdGVAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkaDRGekl4bU5ELmJJaUN1RkJmVUtHLm9IMUR4RzRPOE5LZEREWWx1MmxxWkxLV1MyOEJXZXEiLCJfX3YiOjB9LCJpYXQiOjE3MTA5MTkwMTYsImV4cCI6MTcxMTAwNTQxNn0.KMK2h92pPhjWMCvsFldhKWxwZ7sz5-8qMdIdgTX6PQA";
 
   beforeAll(() => {
-    // Mock
     Users.create.mockResolvedValue({});
     Users.findOne.mockResolvedValue({});
     Users.find.mockResolvedValue([]);
