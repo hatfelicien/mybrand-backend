@@ -21,8 +21,7 @@ const newBlog = async (req, res) => {
       image,
       desc,
     };
-    // save data
-    // await Blogs.create(newBlog)
+
     await Blogs.create(newBlog);
 
     return res.status(201).json({
@@ -35,19 +34,17 @@ const newBlog = async (req, res) => {
     });
   }
 };
-// like a blog
+
 const likeBlog = async (req, res) => {
   try {
-    const { id } = req.params; // Blog ID
+    const { id } = req.params;
     const userId = req.body.userId;
 
-    // Check if the user has already liked the blog
     const blog = await Blogs.findById(id);
     if (!blog) {
       return res.status(404).json({ Message: "Blog not found" });
     }
 
-    // If the user hasn't liked the blog yet
     if (!blog.likes.includes(userId)) {
       const result = await Blogs.findByIdAndUpdate(id, {
         $push: { likes: userId },
@@ -75,8 +72,8 @@ const likeBlog = async (req, res) => {
 // unlike a blog
 const unlikeBlog = async (req, res) => {
   try {
-    const { id } = req.params; // Blog ID
-    const userId = req.body.userId; // User's ID
+    const { id } = req.params;
+    const userId = req.body.userId;
 
     const blog = await Blogs.findById(id);
     if (!blog) {
@@ -167,6 +164,20 @@ const allblogs = async (req, res) => {
   }
 };
 
+const getSingleBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const blog = await Blogs.findById(id);
+    if (!blog) {
+      return res.status(404).json({ Message: "Blog not found" });
+    }
+    return res.status(200).json({ Message: "Blog found", blog });
+  } catch (error) {
+    console.error("Error while fetching the blog:", error);
+    return res.status(500).json({ Message: "Failed to fetch the blog" });
+  }
+};
+
 module.exports = {
   newBlog,
   updateBlog,
@@ -174,4 +185,5 @@ module.exports = {
   allblogs,
   likeBlog,
   unlikeBlog,
+  getSingleBlog,
 };

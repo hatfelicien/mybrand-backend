@@ -1,0 +1,95 @@
+tags:
+  - name: blogs
+    description: blogs API
+paths:
+  /blogs/all:
+    get:
+      summary: all blogs
+      tags:
+        - blogs
+      description: This tests the get request
+      responses:
+        200:
+          description: Stories fetched successfully
+        404:
+          description: Stories could not be found
+  /blogs/new:
+    post:
+      summary: Create a blog
+      tags:
+        - blogs
+      description: This is a test for the blogs
+      security:
+        - jwt: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                desc:
+                  type: string
+                image:
+                  type: string
+      responses:
+        201:
+          description: Story created successfully
+        500:
+          description: Story could not be created.
+
+  /blogs/update/{id}:
+    put:
+      summary: Update a blog
+      description: this will part is updating a blogpost
+      security:
+        - jwt: []
+      tags:
+        - blogs
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                desc:
+                  type: string
+                image:
+                  type: string
+      responses:
+        200:
+          description: Story updated successfully
+        404:
+          description: Story could not be found
+        500:
+          description: Unexpected errors occurred
+  /blogs/{id}:
+    delete:
+      summary: Delete a blog
+      tags:
+        - blogs
+      description: Delete a blog
+      security:
+        - jwt: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        404:
+          description: blog not deleted
+        200:
+          description: blog is deleted successfully
+        500:
+          description: Unexpected error. Please try again

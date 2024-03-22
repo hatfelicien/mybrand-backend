@@ -1,0 +1,29 @@
+tags:
+  - name: Message
+    description: There is where the user interacts with the admin by sending messages
+
+paths:
+  /message/new:
+    post:
+      summary: send text
+      tags:
+        - Message
+      description: this is going to test if the user will be able to send a text message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                content:
+                  type: string
+      responses:
+        200:
+          description: Message sent successfully.
+        500:
+          description: failed to send a message.

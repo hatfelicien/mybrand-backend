@@ -1,0 +1,41 @@
+correct tags:
+  - name: Comments
+    description: Comments API
+paths:
+  /comment/all:
+    get:
+      summary: Get comments
+      tags:
+        - Comments
+      description: This tests the get request on comments
+      responses:
+        200:
+          description: Comments fetched successfully
+        404:
+          description: Comments could not be found
+        500:
+          description: Unexpected error. Please try again
+  /comment/new:
+    post:
+      summary: Create a new comment
+      tags:
+        - Comments
+      description: This is to test adding comments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                comment:
+                  type: string
+      responses:
+        201:
+          description: Comments created successfully
+        200:
+          description: New comment was added successfully.
+        500:
+          description: Unexpected error

@@ -6,11 +6,24 @@ const { blogValidation } = require("../middlewares/validation");
 
 const route = express.Router();
 
-route.post("/new", verifyAuth, upload.single("image"), blogValidation, blogsController.newBlog);
+route.post(
+  "/new",
+  verifyAuth,
+  upload.single("image"),
+  blogValidation,
+  blogsController.newBlog
+);
 route.get("/all", blogsController.allblogs);
-route.patch('/like/:id',verifyAuth, blogsController.likeBlog);
-route.patch('/unlike/:id',verifyAuth, blogsController.unlikeBlog);
-route.put("/:id", verifyAuth, upload.single("image"), blogValidation, blogsController.updateBlog);
-route.delete("delete/:id", verifyAuth, blogsController.deleteBlog);
+route.get("/single/:id", blogsController.getSingleBlog);
+route.patch("/like/:id", verifyAuth, blogsController.likeBlog);
+route.patch("/unlike/:id", verifyAuth, blogsController.unlikeBlog);
+route.put(
+  "/:id",
+  verifyAuth,
+  upload.single("image"),
+  blogValidation,
+  blogsController.updateBlog
+);
+route.delete("/:id", verifyAuth, blogsController.deleteBlog);
 
 module.exports = route;
